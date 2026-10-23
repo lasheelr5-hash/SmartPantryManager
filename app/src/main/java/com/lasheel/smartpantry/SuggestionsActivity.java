@@ -1,0 +1,3 @@
+package com.lasheel.smartpantry;
+import android.app.*;import android.content.*;import android.database.*;import android.os.*;import android.widget.*;
+public class SuggestionsActivity extends Activity {public void onCreate(Bundle b){super.onCreate(b);}protected void onResume(){super.onResume();LinearLayout l=UI.page(this,"Suggested Recipes");DB db=new DB(this);int count=0;try(Cursor c=db.recipes()){while(c.moveToNext()){int id=c.getInt(0);String name=c.getString(1);if(db.matches(c.getString(2))){count++;UI.button(this,l,name,()->{Intent i=new Intent(this,RecipeDetailActivity.class);i.putExtra("id",id);startActivity(i);});}}}if(count==0)UI.text(this,l,"No recipes match your pantry yet — add more ingredients.");UI.button(this,l,"Back to pantry",()->finish());}}

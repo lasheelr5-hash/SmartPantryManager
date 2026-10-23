@@ -1,0 +1,3 @@
+package com.lasheel.smartpantry;
+import android.app.*;import android.os.*;import android.database.*;import android.widget.*;
+public class RecipeDetailActivity extends Activity {public void onCreate(Bundle b){super.onCreate(b);LinearLayout l=UI.page(this,"Recipe Details");DB db=new DB(this);try(Cursor c=db.recipe(getIntent().getIntExtra("id",-1))){if(c.moveToFirst()){UI.text(this,l,c.getString(1));UI.text(this,l,"Ingredients:");for(String ingredient:c.getString(2).split(",")){String[] a=ingredient.split(":");UI.text(this,l,a[0]+": "+a[1]+" "+a[2]);}UI.text(this,l,"Method: "+c.getString(3));}}UI.button(this,l,"Back",()->finish());}}

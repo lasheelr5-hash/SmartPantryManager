@@ -1,0 +1,3 @@
+package com.lasheel.smartpantry;
+import android.app.*;import android.os.*;import android.widget.*;
+public class SettingsActivity extends Activity {public void onCreate(Bundle b){super.onCreate(b);LinearLayout l=UI.page(this,"Settings");Switch sw=new Switch(this);sw.setText("Show expiry reminders preference");sw.setChecked(getPreferences(0).getBoolean("expiry",false));l.addView(sw);sw.setOnCheckedChangeListener((v,on)->getPreferences(0).edit().putBoolean("expiry",on).apply());UI.text(this,l,"Expiry preference is saved locally. Automatic notifications are not implemented.");UI.button(this,l,"Back",()->finish());}}
